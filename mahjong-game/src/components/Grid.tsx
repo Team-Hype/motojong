@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import GridCell from './GridCell'; // Import the encapsulated GridCell component
-
+import { Mahjong, EmptyMahjong } from '../mahjongs/Mahjong';
+import { stat } from 'fs';
 type GridProps = {
   columns: number;
   rows: number;
@@ -44,7 +45,7 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style })
           key={index}
           isSelected={selectedCells[index] || false}
           onClick={() => onCellClick(index)}
-          defaultImage={"mahjong.png"}
+          mahjong={new  EmptyMahjong()}
         />
       ))}
     </StyledGrid>
