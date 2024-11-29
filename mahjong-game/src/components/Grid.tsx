@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import GridCell from './GridCell'; // Import the encapsulated GridCell component
-import { Mahjong, EmptyMahjong } from '../mahjongs/Mahjong';
-import { stat } from 'fs';
-import { BMWHexagon, BMWLogo } from '../mahjongs/BMWSample';
+import { Mahjong } from './game/mahjongs/Mahjong';
+
 type GridProps = {
   columns: number;
   rows: number;
@@ -12,6 +11,7 @@ type GridProps = {
   height: number;
   width: number;
   style?: React.CSSProperties;
+  mahjongs: Mahjong[][];
 };
 
 const StyledGrid = styled(motion.div)<GridProps>`
@@ -29,7 +29,7 @@ const StyledGrid = styled(motion.div)<GridProps>`
   left: 0;
 `;
 
-const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style }) => {
+const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, mahjongs }) => {
   const [selectedCells, setSelectedCells] = useState<{ [key: number]: boolean }>({});
 
   const onCellClick = (index: number) => {
@@ -40,13 +40,13 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style })
   };
 
   return (
-    <StyledGrid columns={columns} rows={rows} gap={gap} height={height} width={width} style={style}>
-      {[...Array(columns * rows)].map((_, index) => (
+    <StyledGrid columns={columns} rows={rows} gap={gap} height={height} width={width} style={style} mahjongs={mahjongs}>
+      {mahjongs.flat().map((mahjong, index) => (
         <GridCell
           key={index}
           isSelected={selectedCells[index] || false}
           onClick={() => onCellClick(index)}
-          mahjong={new  BMWLogo()}
+          mahjong={mahjong}
         />
       ))}
     </StyledGrid>

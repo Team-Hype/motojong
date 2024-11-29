@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Mahjong } from '../mahjongs/Mahjong';
+import { Mahjong } from './game/mahjongs/Mahjong';
 
 type GridCellProps = {
   isSelected: boolean;
