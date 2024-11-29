@@ -44,9 +44,8 @@ class Tile {
         );
     }
 }
-
 function drawTile(scene, tile, tileWidth, tileHeight) {
-    // Create the sprite for the tile
+    // Создаем спрайт плитки
     tile.sprite = scene.add.sprite(tile.x, tile.y, 'tile-back')
         .setInteractive()
         .setDisplaySize(tileWidth, tileHeight);
@@ -57,43 +56,55 @@ function drawTile(scene, tile, tileWidth, tileHeight) {
             .setDisplaySize(tileWidth * 0.6, tileHeight * 0.6);  // Уменьшаем размер изображения, чтобы оно поместилось по центру
     }
 
-    // Attach the click event to the tile
-    tile.sprite.on('pointerdown', () => {
-        onTileClick(scene, tile);
-    });
+    // Проверяем, что tile.sprite существует перед добавлением обработчика событий
+    if (tile.sprite) {
+        tile.sprite.on('pointerdown', () => {
+            if (tile.sprite) {
+                onTileClick(tile); // Исправлено: передаем tile, а не scene
+            } else {
+                console.error('Tile sprite is not initialized');
+            }
+        });
+    } else {
+        console.error('Failed to create tile sprite');
+    }
 }
-
 
 let selectedTile = null;
 
-function onTileClick(tile) {
-    // Если выбрали плитку, то подсвечиваем как выбрануую (прозрачный фильтр серым)
-    if (selectedTile === null) {
-        selectedTile = tile;
-        // прозранчый фильтр серым
-    } else {
-        // Проверяем, совпадает ли выбранная плитка с текущей
-        if (selectedTile.data.values.image === tile.data.values.image && selectedTile !== tile) {
-            matchedTiles++;
-            selectedTile.setAlpha(0.5); // Убираем плитки
-            tile.setAlpha(0.5);
-            selectedTile = null;
-            // если плитки выбраны они исчзеают
-        } else {
-            // Если не совпадает, отчищаем от фильтра
-            this.time.delayedCall(500, () => {
-                selectedTile.setTexture('tile-back');
-                tile.setTexture('tile-back');
-                selectedTile = null;
-            });
-        }
-    }
 
-    // Проверяем на выигрыш
-    if (matchedTiles === tiles.length / 2) {
-        alert('Вы выиграли!');
+function onTileClick(tile) {
+    // Проверяем наличие спрайта перед выполнением действий
+    if (tile.sprite) {
+        if (selectedTile === null) {
+            selectedTile = tile;
+            // Устанавливаем прозрачность
+            selectedTile.sprite.setAlpha(0.5); // Устанавливаем прозрачность
+        } else {
+            // Проверяем на совпадение
+            if (selectedTile.data === tile.data && selectedTile !== tile) {
+                // matchedTiles++;
+                selectedTile.sprite.setAlpha(0.5); // Убираем плитки
+                tile.sprite.setAlpha(0.5);
+                selectedTile = null;
+            } else {
+                setTimeout(() => {
+                    selectedTile.sprite.setTexture('tile-back');
+                    tile.sprite.setTexture('tile-back');
+                    selectedTile.sprite.setAlpha(1); // Возвращаем прозрачность
+                    tile.sprite.setAlpha(1); // Возвращаем прозрачность
+                    selectedTile = null;
+                }, 500);
+            }
+        }
+
+        // Проверяем на выигрыш
+        if (matchedTiles === tiles.length / 2) {
+            alert('Вы выиграли!');
+        }
+    } else {
+        console.error('Tile sprite not found when clicked');
     }
 }
-
 
 export {Tile, drawTile};

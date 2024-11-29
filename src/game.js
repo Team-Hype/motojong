@@ -6,8 +6,8 @@ import {Tile, drawTile} from "./tile";
 // Настройки игры
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     scene: {
         preload: preload,
         create: create,
@@ -31,8 +31,8 @@ function draw_tile(tile) {
 }
 
 function create() {
-    const tileWidth = 50;
-    const tileHeight = 80;
+    const tileWidth = 100;
+    const tileHeight = 140;
     const rows = 4;
     const cols = 4;
 
