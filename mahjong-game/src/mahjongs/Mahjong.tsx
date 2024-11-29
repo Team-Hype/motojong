@@ -10,12 +10,9 @@ type Mahjong = {
 //   cords: Point;
 };
 export class EmptyMahjong implements Mahjong {
-  state: string;
+  state = "avaliable";
   image = "mahjong.png";
 
-  constructor() {
-    this.state = "empty";
-  } 
 }
 export type { Mahjong, Point};
 

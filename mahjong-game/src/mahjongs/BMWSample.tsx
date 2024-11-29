@@ -1,9 +1,13 @@
 
-import { Mahjong } from "./Mahjong"
+import { Mahjong } from "./Mahjong";
 
-type BMWHexagons<Mahjong> = {
-    state: "BMW-hexagon",
-    image: "BMW-hexagon.png",
+export class BMWHexagon implements Mahjong {
+    state = "avaliable";
+    image = "bmw/BMW-hexagon.png";
 }
 
-export type { BMWHexagons }
+
+export class BMWLogo implements Mahjong{
+    state = "avaliable";
+    image = "bmw/BMW-logo.png";
+}

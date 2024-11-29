@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import GridCell from './GridCell'; // Import the encapsulated GridCell component
 import { Mahjong, EmptyMahjong } from '../mahjongs/Mahjong';
 import { stat } from 'fs';
+import { BMWHexagon, BMWLogo } from '../mahjongs/BMWSample';
 type GridProps = {
   columns: number;
   rows: number;
@@ -45,7 +46,7 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style })
           key={index}
           isSelected={selectedCells[index] || false}
           onClick={() => onCellClick(index)}
-          mahjong={new  EmptyMahjong()}
+          mahjong={new  BMWLogo()}
         />
       ))}
     </StyledGrid>
