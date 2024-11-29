@@ -1,5 +1,5 @@
 // main.js
-import {Tile, drawTile} from "./tile";
+import {Board} from "./board";
 
 "./tile"; // Предполагается, что есть класс Tile
 
@@ -26,38 +26,39 @@ function preload() {
     this.load.image('lamba', 'src/assets/LAMBORGHINI.jpg');
 }
 
-function draw_tile(tile) {
 
+function drawBoard(scene, board) {
+    for (let z = 0; z < board.board.length; z++) {
+        for ( let y = 0; y < board.board[z].length; y++) {
+            for ( let x = 0; x < board.board[z][y].length; x++) {
+                board.drawTile(scene, x, y, z);
+                drawTile(scene, x, y, z);
+            }
+        }
+    }
 }
 
 function create() {
     const tileWidth = 100;
     const tileHeight = 140;
+    const delta = 10;
     const rows = 4;
     const cols = 4;
 
-    const tileImages = [
-        'lamba', 'lamba', 'image3', 'image4',
-        'image5', 'image6', 'image7', 'image8',
-        'image1', 'image2', 'image3', 'image4',
-        'image5', 'image6', 'image7', 'image8'
-    ];
+    const board = new Board();
+    board.create_tile(0, 0,0, 'lamba', 'lamba');
 
-    Phaser.Utils.Array.Shuffle(tileImages);
+    drawBoard(this, board);
 
-    tiles = []; // Array to hold all Tile objects
+    // const tileImages = [
+    //     'lamba', 'lamba', 'image3', 'image4',
+    //     'image5', 'image6', 'image7', 'image8',
+    //     'image1', 'image2', 'image3', 'image4',
+    //     'image5', 'image6', 'image7', 'image8'
+    // ];
+    //
+    // Phaser.Utils.Array.Shuffle(tileImages);
 
-    // Create a grid of tiles
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            const x = col * tileWidth + 150;
-            const y = row * tileHeight + 100;
-            const imageType = tileImages[row * cols + col];
-            const tile = new Tile(x, y, 0, 'free', imageType);
-            tiles.push(tile);
-            drawTile(this, tile, tileWidth, tileHeight);
-        }
-    }
 }
 
 function update() {

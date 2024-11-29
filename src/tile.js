@@ -1,5 +1,5 @@
 class Tile {
-    constructor(x, y, z, state = 'free', data) {
+    constructor(x, y, z, state = 'free', data, image) {
         this.x = x; // Координата X
         this.y = y; // Координата Y
         this.z = z; // Координата Z
@@ -7,6 +7,7 @@ class Tile {
         this.height = 2; // Размер по высоте
         this.state = state; // Состояние плитки: 'free', 'selected', 'blocked'
         this.data = data;
+        this.image = image;
     }
 
     // Проверка, занята ли плитка
@@ -43,68 +44,46 @@ class Tile {
             this.z === otherTile.z
         );
     }
-}
-function drawTile(scene, tile, tileWidth, tileHeight) {
-    // Создаем спрайт плитки
-    tile.sprite = scene.add.sprite(tile.x, tile.y, 'tile-back')
-        .setInteractive()
-        .setDisplaySize(tileWidth, tileHeight);
 
-    if (tile.data) {
-        tile.spriteImage = scene.add.sprite(tile.x, tile.y, tile.data)  // tile.data содержит название изображения
-            .setOrigin(0.5, 0.5) // Центрируем изображение
-            .setDisplaySize(tileWidth * 0.6, tileHeight * 0.6);  // Уменьшаем размер изображения, чтобы оно поместилось по центру
-    }
 
-    // Проверяем, что tile.sprite существует перед добавлением обработчика событий
-    if (tile.sprite) {
-        tile.sprite.on('pointerdown', () => {
-            if (tile.sprite) {
-                onTileClick(tile); // Исправлено: передаем tile, а не scene
+    onTileClick(tile, selectedTile, matchedTiles) {
+        // Проверяем наличие спрайта перед выполнением действий
+        if (tile.sprite) {
+            if (selectedTile === null) {
+                selectedTile = tile;
+                // Устанавливаем прозрачность
+                selectedTile.sprite.setAlpha(0.5); // Устанавливаем прозрачность
             } else {
-                console.error('Tile sprite is not initialized');
+                // Проверяем на совпадение
+                if (selectedTile.data === tile.data && selectedTile !== tile) {
+                    // matchedTiles++;
+                    selectedTile.sprite.setAlpha(0.5); // Убираем плитки
+                    tile.sprite.setAlpha(0.5);
+                    selectedTile = null;
+                } else {
+                    setTimeout(() => {
+                        selectedTile.sprite.setTexture('tile-back');
+                        tile.sprite.setTexture('tile-back');
+                        selectedTile.sprite.setAlpha(1); // Возвращаем прозрачность
+                        tile.sprite.setAlpha(1); // Возвращаем прозрачность
+                        selectedTile = null;
+                    }, 500);
+                }
             }
-        });
-    } else {
-        console.error('Failed to create tile sprite');
+
+            // Проверяем на выигрыш
+            if (matchedTiles === tiles.length / 2) {
+                alert('Вы выиграли!');
+            }
+        } else {
+            console.error('Tile sprite not found when clicked');
+        }
     }
+
+
 }
+
 
 let selectedTile = null;
 
-
-function onTileClick(tile) {
-    // Проверяем наличие спрайта перед выполнением действий
-    if (tile.sprite) {
-        if (selectedTile === null) {
-            selectedTile = tile;
-            // Устанавливаем прозрачность
-            selectedTile.sprite.setAlpha(0.5); // Устанавливаем прозрачность
-        } else {
-            // Проверяем на совпадение
-            if (selectedTile.data === tile.data && selectedTile !== tile) {
-                // matchedTiles++;
-                selectedTile.sprite.setAlpha(0.5); // Убираем плитки
-                tile.sprite.setAlpha(0.5);
-                selectedTile = null;
-            } else {
-                setTimeout(() => {
-                    selectedTile.sprite.setTexture('tile-back');
-                    tile.sprite.setTexture('tile-back');
-                    selectedTile.sprite.setAlpha(1); // Возвращаем прозрачность
-                    tile.sprite.setAlpha(1); // Возвращаем прозрачность
-                    selectedTile = null;
-                }, 500);
-            }
-        }
-
-        // Проверяем на выигрыш
-        if (matchedTiles === tiles.length / 2) {
-            alert('Вы выиграли!');
-        }
-    } else {
-        console.error('Tile sprite not found when clicked');
-    }
-}
-
-export {Tile, drawTile};
+export {Tile};
