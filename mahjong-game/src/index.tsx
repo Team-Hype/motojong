@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Grid from './components/grid';
-import MultiLayerGrid from './components/grid';
+import MultiLayerGrid from './components/MultiLayeredGrid';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
