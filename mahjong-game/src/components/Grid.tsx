@@ -44,6 +44,7 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style })
           key={index}
           isSelected={selectedCells[index] || false}
           onClick={() => onCellClick(index)}
+          defaultImage={"mahjong.png"}
         />
       ))}
     </StyledGrid>
