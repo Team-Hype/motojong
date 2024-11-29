@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
 type GridProps = {
   columns: number;
   rows: number;
@@ -15,7 +14,7 @@ type GridCell = {
     isSelected: boolean;
 }
 
-const LayerContainer = styled.div`
+const LayerContainer = styled(motion.div)`
   position: relative;
   width: 100%;
   height: 100vh;
@@ -38,7 +37,9 @@ const StyledGrid = styled(motion.div)<GridProps>`
 
 const StyleGridCell = styled(motion.div)<GridCell>`
   background-color: ${({ isSelected }) => isSelected ? 'rgba(40, 44, 52, 0.5)' : 'red'};
+  cursor: 'grab';
 `;
+
 
 const Grid = ({ columns, rows, gap, height, width, style }: GridProps) => {
   const [selectedCells, setSelectedCells] = useState<{[key: number]: boolean}>({});
