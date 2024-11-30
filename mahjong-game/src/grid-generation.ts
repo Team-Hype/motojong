@@ -1,47 +1,57 @@
-function generate(
+export function generate(
   rows: number, cols: number,
   layersCount: number,
   pairsCount: number
-): number[][][] {
-  const pairsPerLayer = Math.floor(pairsCount / layersCount)
-  const pairsOnGroundLayer = pairsCount - layersCount * pairsPerLayer
+): boolean[][][] {
+  const mahjongCount = 2 * pairsCount
+  if (layersCount == 1)
+    return [generateLayer(null, rows, cols, mahjongCount)]
 
-  let grid: number[][][] = Array(layersCount).map(() => Array(rows).map(() => Array(cols).fill(0)))
+  const mahjongsPerLayer = Math.floor(mahjongCount / layersCount)
+  const mahjongsOnGroundLayer = mahjongCount - (layersCount - 1) * mahjongsPerLayer
 
-  grid[0] = generateLayer(null, rows, cols, pairsOnGroundLayer)
+  let grid: boolean[][][] = Array(layersCount).map(() => Array(rows).map(() => Array(cols).fill(false)))
+
+  grid[0] = generateLayer(null, rows, cols, mahjongsOnGroundLayer)
   for (let i = 1; i < layersCount; i++) {
-    grid[i] = generateLayer(grid[i - 1], rows, cols, pairsPerLayer)
+    grid[i] = generateLayer(grid[i - 1], rows, cols, mahjongsPerLayer)
   }
 
   return grid
 }
 
 function generateLayer(
-  previousLayer: number[][] | null,
+  previousLayer: boolean[][] | null,
   rows: number, cols: number,
-  pairsCount: number
-): number[][] {
-  let layer: number[][] = Array(rows).map(() => Array(cols).fill(0))
+  mahjongsCount: number
+): boolean[][] {
+  let layer: boolean[][] = Array(rows)
+    .fill([])
+    .map(() => Array(cols).fill(0))
 
   let availablePlaces: [number, number][] = Array.from(new Set<[number, number]>(
     previousLayer?.flatMap((row, j) =>
       row.flatMap((mahjong, i) =>
-        mahjong > 0 ? neighourhoodOf(i, j, rows, cols) : []
+        mahjong ? neighourhoodOf(i, j) : []
       )
     ) ?? fullLayer()
   ))
 
-  for (let count = 0; count < pairsCount; count++) {
+  for (let count = 0; count < mahjongsCount; count++) {
     if (availablePlaces.length === 0) break
 
     const randomIndex = Math.floor(Math.random() * availablePlaces.length)
     const [x, y] = availablePlaces[randomIndex]
 
-    layer[x][y] = 1
+    layer[x][y] = true
 
-    availablePlaces = availablePlaces.filter((place) =>
-      !neighourhoodOf(x, y, rows, cols).includes(place)
-    )
+    availablePlaces = availablePlaces.filter(([placeX, placeY]) => {
+      for (let [nx, ny] of neighourhoodOf(x, y))
+        if (nx == placeX && ny == placeY)
+          return false
+
+      return true
+    })
   }
 
   return layer
@@ -54,22 +64,21 @@ function generateLayer(
     }
     return fullLayer
   }
-}
 
-function neighourhoodOf(i: number, j: number, rows: number, cols: number): [number, number][] {
-  const neighbors: [number, number][] = [];
+  function neighourhoodOf(i: number, j: number): [number, number][] {
+    const neighbors: [number, number][] = [];
 
-  for (let di = -1; di <= 1; di++)
-  for (let dj = -1; dj <= 1; dj++) {
-    const ni = i + di;
-    const nj = j + dj;
+    for (let di = -1; di <= 1; di++)
+    for (let dj = -1; dj <= 1; dj++) {
+      const ni = i + di;
+      const nj = j + dj;
 
-    if (0 <= ni && ni < rows && 0 <= nj && nj < cols) {
-      neighbors.push([ni, nj]);
+      if (0 <= ni && ni < rows && 0 <= nj && nj < cols) {
+        neighbors.push([ni, nj]);
+      }
     }
-  }
 
-  return neighbors;
+    return neighbors;
+  }
 }
 
-export { generate }
