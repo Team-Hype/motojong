@@ -9,13 +9,22 @@ export class BMWLevel extends Level{
         const difficulty = 1;
         const board = [
             [
-                [BMWSample[1], null, BMWSample[1], null, BMWSample[3],],
-                [null, null, null, null, null,],
-                [BMWSample[2], null, BMWSample[2], null, BMWSample[3]],
+                [BMWSample[1], null, BMWSample[1], null, BMWSample[3],null,BMWSample[4],null,BMWSample[0],null,],
+                [null, null, null, null, null,null,null,null,null,null,],
+                [BMWSample[2], null, BMWSample[2], null, BMWSample[3],null,BMWSample[4],null,BMWSample[0],null,],
+                [null, null, null, null, null,null,null,null,null,null,],
+                [null, BMWSample[5], null, BMWSample[5],null,BMWSample[4],null,BMWSample[4],null,null],
+                [null, null, null, null, null,null,null,null,null,null,],
+
             ],
-            [   [null,null,null,null,null],
-                [null, BMWSample[4],null,BMWSample[4],null],
-                [null,null,null,null,null],
+            [   [null,null,null,null,null,null,null,null,null,null,],
+                [null, BMWSample[4],null,BMWSample[4],null,BMWSample[3],null,BMWSample[3],null,null,],
+                [null,null,null,null,null,null,null,null,null,null,],
+                [null,null, BMWSample[5], null, BMWSample[5],null,BMWSample[4],null,BMWSample[4],null],
+                [null, null, null, null, null,null,null,null,null,null,],
+
+                [null, null, null, null, null,null,null,null,null,null,],
+
             ]
         ];
         const background = "bmw";
