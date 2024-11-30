@@ -1,3 +1,5 @@
+import { OperationCanceledException } from "typescript";
+
 export class Level {
     id: number;
     size: { x: number; y: number; layers: number };
@@ -36,5 +38,37 @@ export class Level {
 
         return count; // Return the total count
     }
+
+    reshuffle() {
+        let images = this.board.flat().flat().filter(x => x !== null)
+        let boardSceleton = this.board.map(layer => layer.map(row => row.map(x => x !== null)))
+
+        shuffle(images)
+        this.board = boardSceleton
+            .map(layer => layer.map(row => row.map(majhongIsThere => {
+                if (!majhongIsThere)
+                    return null
+
+                const image = images.pop()
+                if (image === undefined)
+                    throw new OperationCanceledException()
+
+                return image
+            }))
+        )
+    }
 }
 
+function shuffle<T>(array: T[]): T[] {
+    let currentIndex = array.length,  randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] =
+      [array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+};
