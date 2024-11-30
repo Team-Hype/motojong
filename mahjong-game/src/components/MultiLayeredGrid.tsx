@@ -24,6 +24,7 @@ type MultiLayerGridProps = {
 const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
   return (
     <LayerContainer level={level}>
+
       {level.board.map((layer: (Mahjong | null)[][], layerIndex: number) => (
         <Grid
           key={layerIndex}

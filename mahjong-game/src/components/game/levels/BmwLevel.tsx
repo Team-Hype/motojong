@@ -13,8 +13,9 @@ export class BMWLevel extends Level{
                 [null, null, null, null, null,],
                 [BMWSample[2], null, BMWSample[2], null, BMWSample[3]],
             ],
-            [   [null,null,null,null],
-                [null, BMWSample[4],null,BMWSample[4]]
+            [   [null,null,null,null,null],
+                [null, BMWSample[4],null,BMWSample[4],null],
+                [null,null,null,null,null],
             ]
         ];
         const background = "bmw";

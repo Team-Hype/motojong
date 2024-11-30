@@ -16,19 +16,11 @@ type GridProps = {
 
 const StyledGrid = styled(motion.div)<GridProps>`
   position: relative;
-  justify-content: center;
-  align-content: center;
-  display: flex;
-  flex-wrap: wrap;
+  bottom: ${({height, gap, rows}) => (rows * (height + gap))}px;
+  right: ${({width, gap, columns}) => columns * (width + gap)}px;
 `;
-const isLeftRightNeighbour = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]) => {
-  const leftIndex = index - 1;
-  const rightIndex = index + 1;
-  const isLeftNeighbour = leftIndex >= 0 && leftIndex % columns !== 0 && mahjongs[Math.floor(leftIndex / columns)][leftIndex % columns];
-  const isRightNeighbour = rightIndex < columns * rows && rightIndex % columns !== 0 && mahjongs[Math.floor(rightIndex / columns)][rightIndex % columns];
-  const isLeftBounded = index % columns === 0;
-  const isRightBounded = (index + 1) % columns === 0;
-  return (!isLeftNeighbour || isLeftBounded) || (!isRightNeighbour || isRightBounded);
+const isBlocked = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]) => {
+  return false;
 };
 
 const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, mahjongs }) => {
@@ -46,7 +38,7 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, m
       {mahjongs.flat().map((mahjong, index) => (
         <GridCell
           key={index}
-          isBlocked={!isLeftRightNeighbour(index, columns, rows, mahjongs)}
+          isBlocked={isBlocked(index, columns, rows, mahjongs)}
           column={index % columns}
           row={Math.floor(index / columns)}
           gap={gap}
