@@ -41,7 +41,7 @@ export class GeneratedLevel extends Level{
         )
 
         const background = "bmwww";
-        super(id, difficulty, board, background);
+        super(id, difficulty, board, background, "logo192.png", []);
     }
 }
 

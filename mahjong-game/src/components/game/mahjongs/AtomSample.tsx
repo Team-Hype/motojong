@@ -28,7 +28,7 @@ export class AtomCar implements Mahjong{
 }
 
 
-export const BMWSample : Mahjong[] = [
+export const AtomSample : Mahjong[] = [
     new AtomLogoGray(),
     new AtomLogoBlue(),
     new AtomCarFront(),

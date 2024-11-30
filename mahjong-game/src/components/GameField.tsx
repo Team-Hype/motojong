@@ -4,7 +4,10 @@ import MultiLayerGrid from "./MultiLayeredGrid";
 import { BMWLevel } from "./game/levels/BmwLevel";
 import { Level } from "./game/Level";
 import Header from "./Header";
-
+import { GeneratedLevel } from "./game/levels/GeneratedLevel";
+import { BMWSample } from "./game/mahjongs/BMWSample";
+import { ToyotaSample } from "./game/mahjongs/ToyotaSample";
+import { AtomSample } from "./game/mahjongs/AtomSample";
 const GameStyled = styled.div`
     position: absolute;
     display: flex;
@@ -20,7 +23,10 @@ const GameStyled = styled.div`
 const GameField = () => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const [level, setLevel] = useState<Level>(new BMWLevel());
+    const [level, setLevel] = useState<Level>(new GeneratedLevel(
+        BMWSample.concat(AtomSample).concat(ToyotaSample).map(e => e.image),
+        45,10,20,3
+    ));
     const [points, setPoints] = useState(0);
 
     const randomFact = level.facts?.length > 0
