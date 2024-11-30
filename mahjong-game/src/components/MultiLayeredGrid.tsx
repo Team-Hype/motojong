@@ -5,10 +5,16 @@ import Grid from './Grid';
 import { Level } from './game/Level';
 import { Mahjong } from './game/mahjongs/Mahjong';
 
-const LayerContainer = styled(motion.div)`
-  position: relative;
-  width: 100%;
+const LayerContainer = styled(motion.div)<{level: Level}>`
+  position: absolute;
   height: 100vh;
+  background-color: #41454C;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
 `;
 
 type MultiLayerGridProps = {
@@ -17,8 +23,8 @@ type MultiLayerGridProps = {
 
 const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
   return (
-    <LayerContainer layout>
-      {level.board.map((layer: Mahjong[][], layerIndex: number) => (
+    <LayerContainer level={level}>
+      {level.board.map((layer: (Mahjong | null)[][], layerIndex: number) => (
         <Grid
           key={layerIndex}
           columns={layer[0].length} // Number of columns in this layer
@@ -28,8 +34,7 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
           width={100}
           style={{
             zIndex: layerIndex + 1, // Ensure each layer is stacked
-            backgroundColor: layerIndex === 0 ? '#41454C' : 'transparent', // Optional styling for the first layer
-          }}
+                      }}
           mahjongs={layer}
         />
       ))}

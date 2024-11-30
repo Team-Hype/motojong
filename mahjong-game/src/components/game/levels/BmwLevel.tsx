@@ -9,14 +9,12 @@ export class BMWLevel extends Level{
         const difficulty = 1;
         const board = [
             [
-                [BMWSample[1], BMWSample[2], BMWSample[3], BMWSample[4], BMWSample[3]],
-                [BMWSample[0], BMWSample[0], BMWSample[0], BMWSample[0], BMWSample[4]],
-                [new EmptyMahjong(), BMWSample[1],BMWSample[1], new EmptyMahjong(), new EmptyMahjong()],
+                [BMWSample[1], null, BMWSample[1], null, BMWSample[3],],
+                [null, null, null, null, null,],
+                [BMWSample[2], null, BMWSample[2], null, BMWSample[3]],
             ],
-            [
-                [BMWSample[5],BMWSample[5],BMWSample[0],BMWSample[0]],
-                [BMWSample[5],BMWSample[5],BMWSample[0],BMWSample[0]],
-                
+            [   [null,null,null,null],
+                [null, BMWSample[4],null,BMWSample[4]]
             ]
         ];
         const background = "bmw";

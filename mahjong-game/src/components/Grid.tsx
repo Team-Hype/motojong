@@ -11,23 +11,25 @@ type GridProps = {
   height: number;
   width: number;
   style?: React.CSSProperties;
-  mahjongs: Mahjong[][];
+  mahjongs: (Mahjong | null)[][];
 };
 
 const StyledGrid = styled(motion.div)<GridProps>`
-  display: grid;
-  grid-template-columns: repeat(${({ columns }) => columns}, ${({ width }) => width}px);
-  grid-template-rows: repeat(${({ rows }) => rows}, ${({ height }) => height}px);
-  grid-gap: ${({ gap }) => gap}px;
+  position: relative;
   justify-content: center;
   align-content: center;
-  background-color: rgba(40, 44, 52, 0.5);
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  left: 0;
+  display: flex;
+  flex-wrap: wrap;
 `;
+const isLeftRightNeighbour = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]) => {
+  const leftIndex = index - 1;
+  const rightIndex = index + 1;
+  const isLeftNeighbour = leftIndex >= 0 && leftIndex % columns !== 0 && mahjongs[Math.floor(leftIndex / columns)][leftIndex % columns];
+  const isRightNeighbour = rightIndex < columns * rows && rightIndex % columns !== 0 && mahjongs[Math.floor(rightIndex / columns)][rightIndex % columns];
+  const isLeftBounded = index % columns === 0;
+  const isRightBounded = (index + 1) % columns === 0;
+  return (!isLeftNeighbour || isLeftBounded) || (!isRightNeighbour || isRightBounded);
+};
 
 const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, mahjongs }) => {
   const [selectedCells, setSelectedCells] = useState<{ [key: number]: boolean }>({});
@@ -40,10 +42,16 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, m
   };
 
   return (
-    <StyledGrid columns={columns} rows={rows} gap={gap} height={height} width={width} style={style} mahjongs={mahjongs}>
+    <StyledGrid columns={columns} rows={rows} gap={gap} height={height/2} width={width/2} style={style} mahjongs={mahjongs}>
       {mahjongs.flat().map((mahjong, index) => (
         <GridCell
           key={index}
+          isBlocked={!isLeftRightNeighbour(index, columns, rows, mahjongs)}
+          column={index % columns}
+          row={Math.floor(index / columns)}
+          gap={gap}
+          height={height}
+          width={width}
           isSelected={selectedCells[index] || false}
           onClick={() => onCellClick(index)}
           mahjong={mahjong}
@@ -54,3 +62,4 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, m
 };
 
 export default Grid;
+
