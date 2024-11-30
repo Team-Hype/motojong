@@ -12,12 +12,14 @@ export class TestLevel extends Level {
     // Example board layout with 1 layer, 3x3 grid
     const board = [
       [
-        [new EmptyMahjong(), new EmptyMahjong(), new EmptyMahjong()],
-        [new BMWHexagon(), new EmptyMahjong(), new EmptyMahjong()],
-        [new EmptyMahjong(), new BMWLogo(), new EmptyMahjong()],
+        [new EmptyMahjong(),null, new EmptyMahjong(),null, new EmptyMahjong(),null],
+        [null,null,null,null,null,null],
+        [new EmptyMahjong(),null, new EmptyMahjong(),null, new EmptyMahjong(),null],
+        [null,null,null,null,null,null],
+        [new EmptyMahjong(),null, new EmptyMahjong(),null, new EmptyMahjong(),null],
+        [null,null,null,null,null,null],
       ],
     ];
-
     const background = "test";
 
     // Call parent constructor
