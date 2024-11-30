@@ -1,7 +1,5 @@
 import { Level } from "../Level";
 import { BMWSample} from "../mahjongs/BMWSample";
-import { ToyotaSample } from "../mahjongs/ToyotaSample";
-import { EmptyMahjong } from "../mahjongs/Mahjong";
 
 
 export class BMWLevel extends Level{
@@ -39,5 +37,5 @@ export class BMWLevel extends Level{
         ];
         const background = "bmw";
         super(id, difficulty, board, background, 'logo192.png', ['jopa', 'penis', 'siski']);
-    }   
+    }
 }

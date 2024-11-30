@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MultiLayerGrid from "./MultiLayeredGrid";
-import { BMWLevel } from "./game/levels/BmwLevel";
 import { Level } from "./game/Level";
 import Header from "./Header";
 import { GeneratedLevel } from "./game/levels/GeneratedLevel";
@@ -23,9 +22,9 @@ const GameStyled = styled.div`
 const GameField = () => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const [level, setLevel] = useState<Level>(new GeneratedLevel(
-        BMWSample.concat(AtomSample).concat(ToyotaSample).map(e => e.image),
-        45,10,20,3
+    const [level, _] = useState<Level>(new GeneratedLevel(
+        BMWSample.concat(AtomSample).concat(ToyotaSample),
+        20,20,20,4
     ));
     const [points, setPoints] = useState(0);
 

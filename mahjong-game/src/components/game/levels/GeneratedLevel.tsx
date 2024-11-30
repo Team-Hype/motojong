@@ -1,7 +1,6 @@
 import { OperationCanceledException } from "typescript";
 import { generate } from "../../../grid-generation";
 import { Level } from "../Level";
-import { Mahjong } from "../mahjongs/Mahjong";
 
 
 export class GeneratedLevel extends Level{
@@ -26,7 +25,7 @@ export class GeneratedLevel extends Level{
         }
 
         shuffle(imagesQueue)
-        const board: (Mahjong | null)[][][] = generate(rows, cols, layersCount, pairsCount)
+        const board: (string | null)[][][] = generate(rows, cols, layersCount, pairsCount)
             .map(layer => layer.map(row => row.map(majhongIsThere => {
                 if (!majhongIsThere)
                     return null
@@ -36,7 +35,7 @@ export class GeneratedLevel extends Level{
                     // return { state: "state", image: images[0] }
                     throw new OperationCanceledException()
 
-                return { state: "state", image }
+                return image
             }))
         )
 

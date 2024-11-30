@@ -26,7 +26,7 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ given_level, width, hei
     const [heightCell, setHeightCell] = useState(0);
     const [widthCell, setWidthCell] = useState(0);
     const [gap, setGap] = useState<number>(0);
-    const [topOffset, setTopOffset] = useState<number>(0);
+    const [topOffset, _] = useState<number>(0);
     const [leftOffset, setLeftOffset] = useState<number>(0);
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ given_level, width, hei
         if (selectedCell && selectedCell?.x === col && selectedCell?.y === row && selectedCell?.z === layerIndex) {
             setSelectedCell(null);
         } else {
-            if (level && selectedCell && level.board[layerIndex][row][col]?.image === level.board[selectedCell.z][selectedCell.y][selectedCell.x]?.image) {
+            if (level && selectedCell && level.board[layerIndex][row][col] === level.board[selectedCell.z][selectedCell.y][selectedCell.x]) {
 
                 level.board[layerIndex][row][col] = null;
                 level.board[selectedCell.z][selectedCell.y][selectedCell.x] = null;
@@ -107,7 +107,7 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ given_level, width, hei
                             zIndex={layerIndex + 10}
                             height={heightCell}
                             width={widthCell}
-                            image={mahjong?.image || ''}
+                            image={mahjong ?? ''}
                             isBlocked={isBlocked(col, row, layerIndex)}
                             isSelected={selectedCell?.x === col && selectedCell?.y === row && selectedCell?.z === layerIndex}
                             onClick={() => handleCellClick(col, row, layerIndex)}
