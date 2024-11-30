@@ -22,6 +22,13 @@ type MultiLayerGridProps = {
 };
 
 const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
+  var screenHeight = window.innerHeight;
+  var screenWidth = window.innerWidth;
+  var ratio = 3 / 2;
+  var height = Math.min(screenHeight / (level.size.y + 1), screenWidth / (level.size.x + 1) * ratio);
+  var width = Math.min(screenWidth / (level.size.x + 1), screenHeight / (level.size.y + 1) * (1 / ratio));
+  var gap = 0;
+
   return (
     <LayerContainer level={level}>
 
@@ -30,9 +37,9 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
           key={layerIndex}
           columns={layer[0].length} // Number of columns in this layer
           rows={layer.length} // Number of rows in this layer
-          gap={0}
-          height={150}
-          width={100}
+          gap={gap}
+          height={height}
+          width={width}
           style={{
             zIndex: layerIndex + 1, // Ensure each layer is stacked
                       }}

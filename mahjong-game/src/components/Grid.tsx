@@ -65,7 +65,9 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, m
   };
 
   return (
-    <StyledGrid columns={columns} rows={rows} gap={gap} height={height/2} width={width/2} style={style} mahjongs={mahjongs}>
+    <StyledGrid columns={columns} rows={rows} gap={gap} 
+          height={height/2} width={width/2}
+          style={style} mahjongs={mahjongs}>
       {mahjongs.flat().map((mahjong, index) => (
         <GridCell
           key={index}
