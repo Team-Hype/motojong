@@ -34,18 +34,18 @@ const GridCell: React.FC<GridCellProps> = ({column, row, gap, height, width,isBl
   return (
     <StyledGridCell
       isBlocked={isBlocked}
-      onClick={onClick}
+      onClick={isBlocked ? (e) => e.preventDefault() : onClick}
       isSelected={isSelected}
       mahjong={mahjong}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      whileDrag={{ scale: 0.95 }}
+      whileHover={isBlocked ? undefined : { scale: 1.05 }}
+      whileTap={isBlocked ? undefined : { scale: 0.95 }}
+      whileDrag={isBlocked ? undefined : { scale: 0.95 }}
       column = {column}
       row = {row}
       gap = {gap}
       height={height}
       width={width}
-      drag
+      drag={isBlocked ? false : true}
       dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
     />
   );

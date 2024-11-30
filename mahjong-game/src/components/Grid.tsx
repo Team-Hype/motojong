@@ -21,7 +21,7 @@ const StyledGrid = styled(motion.div)<GridProps>`
 `;
 
 const isBlocked = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]) => {
-  return false;
+  return true;
 };
 const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, mahjongs }) => {
   const [selectedCells, setSelectedCells] = useState<{ [key: number]: boolean }>({});
