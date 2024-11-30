@@ -25,7 +25,7 @@ const GameField = () => {
 
     const randomFact = level.facts?.length > 0
         ? level.facts[Math.floor(Math.random() * level.facts.length)]
-        : "No facts available";
+        : "";
 
     return (
         <GameStyled>
