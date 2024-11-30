@@ -10,13 +10,13 @@ export class Level {
     picture: string;
     facts: string[];
 
-    constructor(id: number, difficulty: number, board: (string | null)[][][], background: string, picture: string, facts: string[]) {
+    constructor(id: number, difficulty: number, board: (string | null)[][][], background: string, picture: string, facts: string[], cells: number=-1) {
         this.id = id;
         this.size = {x: board[0][0].length, y: board[0].length, layers: board.length};
         this.difficulty = difficulty;
         this.background = background;
         this.board = board;
-        this.cells = this.count_init_cells()
+        this.cells = cells === -1 ? this.count_init_cells() : cells
         this.picture = picture;
         this.facts = facts;
     }
@@ -40,6 +40,7 @@ export class Level {
     }
 
     reshuffle() {
+        console.log("reshufled")
         let images = this.board.flat().flat().filter(x => x !== null)
         let boardSceleton = this.board.map(layer => layer.map(row => row.map(x => x !== null)))
 

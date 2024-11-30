@@ -40,7 +40,7 @@ export class GeneratedLevel extends Level{
         )
 
         const background = "bmwww";
-        super(id, difficulty, board, background, "logo192.png", []);
+        super(id, difficulty, board, background, "bmw_car 2.png", ['Atom - первый российский автомобиль с дверями без центральной стойки', 'В 1977  году Toyota создала первый в мире массовый гибридный автомобиль.', 'BMW разработала первый электромобиль в 1972 году']);
     }
 }
 
