@@ -42,6 +42,10 @@ const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, m
     if (currentlySelectedCells.length === 1) {
       const cell1Index = +currentlySelectedCells[0];
       const cell2Index = +index;
+      if (cell1Index === cell2Index) {
+        setSelectedCells({});
+        return;
+      }
       const cell1 = mahjongs[Math.floor(cell1Index / columns)][cell1Index % columns];
       const cell2 = mahjongs[Math.floor(cell2Index / columns)][cell2Index % columns];
       if (cell1?.image === cell2?.image) {
