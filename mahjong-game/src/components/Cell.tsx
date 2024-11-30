@@ -34,13 +34,15 @@ const StyledCell = styled(motion.div)<{
     height: ${({ height }) => `${height * 2}px`};
     z-index: ${({ zIndex }) => zIndex};
 
+    border: 1px solid black;
+    border-radius: 15%;
     background-image: ${({ image }) => `url(${image})`};
     background-size: cover;
     background-position: center;
     cursor: ${({ isBlocked }) => (isBlocked ? 'not-allowed' : 'grab')};
-    filter: ${({ isBlocked }) => (isBlocked ? 'brightness(0.7)' : 'none')};
+    filter: ${({ isBlocked }) => (isBlocked ? 'brightness(0.8)' : 'none')};
     ${({ isBlocked, isSelected }) =>
-    isBlocked ? '' : isSelected && 'filter: brightness(0.7) contrast(1.1) sepia(0.7) hue-rotate(10deg) saturate(3);'}
+    isBlocked ? '' : isSelected && 'filter: brightness(0.8) contrast(1.1) sepia(0.7) hue-rotate(10deg) saturate(3);'}
     
 `;
 
