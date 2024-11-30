@@ -20,17 +20,44 @@ const StyledGrid = styled(motion.div)<GridProps>`
   right: ${({width, gap, columns}) => columns * (width + gap)}px;
 `;
 
-const isBlocked = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]) => {
-  return true;
-};
+const isBlocked = (index: number, columns: number, rows: number, mahjongs: (Mahjong | null)[][]): boolean => {
+    const row = Math.floor(index / columns);
+    const col = index % columns;
+  
+    // Check if the cell itself is null (e.g., empty space)
+    if (mahjongs[row][col] === null) {
+      return true;
+    }
+  
+    // Check surrounding cells or conditions to determine if the cell is blocked
+    // For example, check if neighboring cells are blocked or empty
+    return false; // Replace with actual logic as needed
+  };
+  
 const Grid: React.FC<GridProps> = ({ columns, rows, gap, height, width, style, mahjongs }) => {
   const [selectedCells, setSelectedCells] = useState<{ [key: number]: boolean }>({});
 
   const onCellClick = (index: number) => {
-    setSelectedCells((prevSelectedCells) => ({
-      ...prevSelectedCells,
-      [index]: !prevSelectedCells[index],
-    }));
+    const currentlySelectedCells = Object.keys(selectedCells).filter((key) => selectedCells[+key]);
+    if (currentlySelectedCells.length === 1) {
+      const cell1Index = +currentlySelectedCells[0];
+      const cell2Index = +index;
+      const cell1 = mahjongs[Math.floor(cell1Index / columns)][cell1Index % columns];
+      const cell2 = mahjongs[Math.floor(cell2Index / columns)][cell2Index % columns];
+      if (cell1?.image === cell2?.image) {
+        console.log('Match found:', cell1, cell2);
+        mahjongs[Math.floor(cell1Index / columns)][cell1Index % columns] = null;
+        mahjongs[Math.floor(cell2Index / columns)][cell2Index % columns] = null;
+
+      }
+      setSelectedCells({});
+
+    } else {
+      setSelectedCells((prevSelectedCells) => ({
+        ...prevSelectedCells,
+        [index]: !prevSelectedCells[index],
+      }));
+    }
   };
 
   return (
