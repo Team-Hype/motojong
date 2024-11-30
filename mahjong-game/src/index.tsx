@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <div style={{position: 'relative'}}>
-      <MultiLayerGrid level={new BMWLevel()}/>
+      <MultiLayerGrid given_level={new BMWLevel()}/>
     </div>
 
   </React.StrictMode>

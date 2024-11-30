@@ -1,54 +1,89 @@
-import React from 'react';
+import React, {useEffect, useState, useMemo, useCallback} from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import Grid from './Grid';
-import { Level } from './game/Level';
-import { Mahjong } from './game/mahjongs/Mahjong';
+import {motion} from 'framer-motion';
+import {Level} from './game/Level';
+import Cell from './Cell';
 
-const LayerContainer = styled(motion.div)<{level: Level}>`
-  position: absolute;
-  height: 100vh;
-  background-color: #41454C;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  
+const LayerContainer = styled(motion.div)`
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+
+    background-color: #41454C;
 `;
 
 type MultiLayerGridProps = {
-  level: Level;
+    given_level: Level;
 };
 
-const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ level }) => {
-  var screenHeight = window.innerHeight;
-  var screenWidth = window.innerWidth;
-  var ratio = 3 / 2;
-  var height = Math.min(screenHeight / (level.size.y + 1), screenWidth / (level.size.x + 1) * ratio);
-  var width = Math.min(screenWidth / (level.size.x + 1), screenHeight / (level.size.y + 1) * (1 / ratio));
-  var gap = 0;
+const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({given_level}) => {
+    const [level, setLevel] = useState<Level | null>(null);
+    const [selectedCell, setSelectedCell] = useState<{ x: number; y: number; z: number } | null>(null);
+    const [heightCell, setHeightCell] = useState(0);
+    const [widthCell, setWidthCell] = useState(0);
 
-  return (
-    <LayerContainer level={level}>
+    useEffect(() => {
+        setLevel(given_level);
+    }, [given_level]);
 
-      {level.board.map((layer: (Mahjong | null)[][], layerIndex: number) => (
-        <Grid
-          key={layerIndex}
-          columns={layer[0].length} // Number of columns in this layer
-          rows={layer.length} // Number of rows in this layer
-          gap={gap}
-          height={height}
-          width={width}
-          style={{
-            zIndex: layerIndex + 1, // Ensure each layer is stacked
-                      }}
-          mahjongs={layer}
-        />
-      ))}
-    </LayerContainer>
-  );
+    useEffect(() => {
+        if (level !== null) {
+            const screenHeight = window.innerHeight;
+            const screenWidth = window.innerWidth;
+            const ratio = 3 / 2;
+            const computedHeightCell = Math.min(
+                screenHeight / (level.size.y + 1),
+                (screenWidth / (level.size.x + 1)) * ratio
+            );
+            const computedWidthCell = Math.min(
+                screenWidth / (level.size.x + 1),
+                (screenHeight / (level.size.y + 1)) * (1 / ratio)
+            );
+            setHeightCell(computedHeightCell);
+            setWidthCell(computedWidthCell);
+        }
+    }, [level]);
+
+    const handleCellClick = useCallback(
+        (col: number, row: number, layerIndex: number) => {
+            console.log("handled: " + col, row, layerIndex);
+            console.log("selected: " + selectedCell?.x, selectedCell?.y, selectedCell?.z);
+            if (selectedCell && selectedCell?.x === col && selectedCell?.y === row && selectedCell?.z === layerIndex) {
+                setSelectedCell(null);
+            } else {
+                setSelectedCell({x: col, y: row, z: layerIndex});
+            }
+        }, []);
+
+    const renderCells = useMemo(() => {
+        return level?.board.map((layer, layerIndex) =>
+            layer.map((mahjongsRow, row) =>
+                mahjongsRow.map((mahjong, col) => (
+                    mahjong !== null ?
+                        <Cell
+                            key={`${layerIndex}-${row}-${col}`}
+                            top={row * (heightCell)}
+                            left={col * (widthCell)}
+                            zIndex={layerIndex + 10}
+                            height={heightCell}
+                            width={widthCell}
+                            image={mahjong?.image || ''}
+                            isBlocked={false}
+                            isSelected={selectedCell?.x === col && selectedCell?.y === row && selectedCell?.z === layerIndex}
+                            onClick={() => handleCellClick(col, row, layerIndex)}
+                        />
+                        :
+                        null
+                ))
+            )
+        );
+    }, [level, heightCell, widthCell, selectedCell]);
+
+    if (!level) {
+        return null;
+    }
+
+    return <LayerContainer>{renderCells}</LayerContainer>;
 };
 
 export default MultiLayerGrid;
-

@@ -4,15 +4,28 @@ type Point = {
   z: number;
 };
 
-type Mahjong = {
-  state: string;
-  image: string;
-//   cords: Point;
-};
-export class EmptyMahjong implements Mahjong {
-  state = "avaliable";
-  image = "mahjong.png";
-
+enum State {
+  Available = "available",
+  Selected = "selected",
+  Blocked = "blocked"
 }
-export type { Mahjong, Point};
+
+type Mahjong = {
+  state: State;
+  image: string;
+  // cords?: Point; // Optional if not all Mahjong objects require coordinates
+};
+
+class EmptyMahjong implements Mahjong {
+  state: State = State.Available;
+  image: string = "mahjong.png";
+}
+
+class VoidMahjong implements Mahjong {
+  state: State = State.Available;
+  image: string = "";
+}
+
+export type { Mahjong, Point };
+export { State, VoidMahjong, EmptyMahjong };
 
