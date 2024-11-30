@@ -8,14 +8,18 @@ export class Level {
     board: (Mahjong | null)[][][];
     background: string;
     cells: number
+    picture: string;
+    facts: string[];
 
-    constructor(id: number, difficulty: number, board: (Mahjong | null)[][][], background: string) {
+    constructor(id: number, difficulty: number, board: (Mahjong | null)[][][], background: string, picture: string, facts: string[]) {
         this.id = id;
         this.size = {x: board[0][0].length, y: board[0].length, layers: board.length};
         this.difficulty = difficulty;
         this.background = background;
         this.board = board;
         this.cells = this.count_init_cells()
+        this.picture = picture;
+        this.facts = facts;
     }
 
     count_init_cells() {

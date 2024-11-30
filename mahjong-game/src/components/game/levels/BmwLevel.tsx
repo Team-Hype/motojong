@@ -37,6 +37,6 @@ export class BMWLevel extends Level{
             ]
         ];
         const background = "bmw";
-        super(id, difficulty, board, background);
+        super(id, difficulty, board, background, 'logo192.png', ['jopa', 'penis', 'siski']);
     }   
 }

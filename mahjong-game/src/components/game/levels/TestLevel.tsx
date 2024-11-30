@@ -31,6 +31,6 @@ export class TestLevel extends Level {
     const background = "test";
 
     // Call parent constructor
-    super(id, difficulty, board, background);
+    super(id, difficulty, board, background, 'logo192.png', ['jopa', 'penis', 'siski']);
     }
 }
