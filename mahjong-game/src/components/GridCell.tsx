@@ -27,7 +27,7 @@ const StyledGridCell = styled(motion.div)<{ row: number; column: number; width: 
   height: ${({ height }) => height*2}px;
   ${({ mahjong }) => !mahjong && 'pointer-events: none;'}
   filter: ${({ isBlocked }) => isBlocked ? 'brightness(0.5)' : 'none'};
-  ${({ isBlocked, isSelected }) => isBlocked ? '' : isSelected && 'filter: brightness(0.7) contrast(1.1) sepia(0.5) hue-rotate(10deg);'}
+  ${({ isBlocked, isSelected }) => isBlocked ? '' : isSelected && 'filter: brightness(0.7) contrast(1.1) sepia(0.7) hue-rotate(10deg) saturate(3);'}
 `;
 
 const GridCell: React.FC<GridCellProps> = ({column, row, gap, height, width,isBlocked, isSelected, onClick, mahjong }) => {
