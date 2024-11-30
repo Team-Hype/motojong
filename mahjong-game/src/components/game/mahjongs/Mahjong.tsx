@@ -11,7 +11,7 @@ enum State {
 }
 
 type Mahjong = {
-  state: State;
+  // state: State;
   image: string;
   // cords?: Point; // Optional if not all Mahjong objects require coordinates
 };
