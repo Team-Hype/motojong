@@ -34,8 +34,6 @@ const StyledCell = styled(motion.div)<{
     height: ${({ height }) => `${height * 2}px`};
     z-index: ${({ zIndex }) => zIndex};
 
-    border: 1px solid black;
-    border-radius: 15%;
     background-image: ${({ image }) => `url(${image})`};
     background-size: cover;
     background-position: center;

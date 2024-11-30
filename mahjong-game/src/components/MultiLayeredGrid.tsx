@@ -46,7 +46,7 @@ const MultiLayerGrid: React.FC<MultiLayerGridProps> = ({ given_level, width, hei
                 screenWidth / (level.size.x + 1),
                 (screenHeight / (level.size.y + 1)) * (1 / ratio)
             );
-            setGap(computedWidthCell / 10 );
+            setGap(computedWidthCell / 30 );
             setLeftOffset( ( screenWidth - (computedWidthCell + gap)* level.size.x ) / 2 );
             setLeftOffset( ( screenWidth - (computedWidthCell + gap)* level.size.x ) / 2 );
             setHeightCell(computedHeightCell);
