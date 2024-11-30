@@ -11,6 +11,15 @@
 <img src="https://github.com/user-attachments/assets/32a5c381-f2b8-4b0b-b64a-da5142c957bc" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
 <img src="https://github.com/user-attachments/assets/e11af6ef-29e6-4f2a-bf7b-e52dcfb694b0" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
 
+## Наборы карточек / Универсальная сетка
+![image](https://github.com/user-attachments/assets/ea820c59-29eb-4154-8634-871711e3c6d4)
+![image](https://github.com/user-attachments/assets/addb15d7-31ce-4048-a16c-e8e56053f288)
+
+## Познавательные банеры о тематических уровнях
+![image](https://github.com/user-attachments/assets/5e0f6631-ddb4-45f2-8215-487dc528e6a8)
+![image](https://github.com/user-attachments/assets/4af38f91-684f-410c-9aaa-ff3d1835ac37)
+![image](https://github.com/user-attachments/assets/278fc25c-f122-4c50-9b92-4a6a94db1b8f)
+
 ## Особенности
 - 🗺️ Многослойноя сетка уровня
 - 🔗 Метч парных плиток
