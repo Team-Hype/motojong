@@ -9,6 +9,7 @@
 **Motojong** – браузерная кроссплатформенная игра маджонг по автомобильной тематике.  
 ## Демо геймплея
 <img src="https://github.com/user-attachments/assets/32a5c381-f2b8-4b0b-b64a-da5142c957bc" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
+<img src="https://github.com/user-attachments/assets/e11af6ef-29e6-4f2a-bf7b-e52dcfb694b0" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
 
 ## Особенности
 - 🗺️ Многослойноя сетка уровня
