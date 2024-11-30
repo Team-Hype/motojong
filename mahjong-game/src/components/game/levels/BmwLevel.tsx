@@ -1,5 +1,6 @@
 import { Level } from "../Level";
 import { BMWSample} from "../mahjongs/BMWSample";
+import { ToyotaSample } from "../mahjongs/ToyotaSample";
 import { EmptyMahjong } from "../mahjongs/Mahjong";
 
 
