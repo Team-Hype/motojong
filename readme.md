@@ -45,8 +45,8 @@
 ### Установка
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/Hackathon-championship-RT/students3
-cd students3/madjong-game
+git clone https://github.com/Team-Hype/motojong
+cd motojong/mahjong-game
 ```
 2. Установка зависимостей
 ```bash
@@ -61,7 +61,7 @@ npm start
 
 ~. Сборка проекта
 ```bash
-npm runbuild
+npm run build
 ```
 ## Команда хайпа:
 - 👨‍💻[Мельников Сергей](https://github.com/peplxx)
