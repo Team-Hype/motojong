@@ -4,21 +4,12 @@
 ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-FF1F8E?logo=framer&logoColor=white)
 
 # Motojong
-![GithubPreview](https://github.com/user-attachments/assets/89eb19f5-87c9-43b7-9749-23abbad27deb)
+![GithubPreview](https://github.com/user-attachments/assets/0d68e63b-5532-432d-a8e2-8eea87aabb7c)
 
 **Motojong** – браузерная кроссплатформенная игра маджонг по автомобильной тематике.  
 ## Демо геймплея
-<img src="https://github.com/user-attachments/assets/32a5c381-f2b8-4b0b-b64a-da5142c957bc" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
-<img src="https://github.com/user-attachments/assets/e11af6ef-29e6-4f2a-bf7b-e52dcfb694b0" alt="Gameplay Screencast" style="display: block; margin: 0 auto;" />
-
-## Наборы карточек / Универсальная сетка
-![image](https://github.com/user-attachments/assets/ea820c59-29eb-4154-8634-871711e3c6d4)
-![image](https://github.com/user-attachments/assets/addb15d7-31ce-4048-a16c-e8e56053f288)
-
-## Познавательные банеры о тематических уровнях
-![image](https://github.com/user-attachments/assets/5e0f6631-ddb4-45f2-8215-487dc528e6a8)
-![image](https://github.com/user-attachments/assets/4af38f91-684f-410c-9aaa-ff3d1835ac37)
-![image](https://github.com/user-attachments/assets/278fc25c-f122-4c50-9b92-4a6a94db1b8f)
+![Screencast from 30 11 2024 18-36-18](https://github.com/user-attachments/assets/6d63d724-99cc-4082-9159-91245d00a6a5)
+![Screencast from 30 11 2024 20-32-31](https://github.com/user-attachments/assets/619e2c9f-82a3-485a-8c43-0dfd94dfce2f)
 
 ## Особенности
 - 🗺️ Многослойноя сетка уровня
